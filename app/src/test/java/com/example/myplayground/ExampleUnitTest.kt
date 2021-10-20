@@ -21,10 +21,16 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun feature2_isCorrect() {
-        var a = 1
-        a++
-        println("Feature 2")
-        assertEquals(2, a)
+    fun decrement_isCorrect() {
+        var a = 2
+        a--
+        assertEquals(1, a)
+
+        @Test
+        fun feature2_isCorrect() {
+            var a = 1
+            a++
+            println("Feature 2")
+            assertEquals(2, a)
+        }
     }
-}
