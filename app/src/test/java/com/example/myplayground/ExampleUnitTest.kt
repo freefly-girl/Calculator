@@ -15,23 +15,4 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
-
-    @Test
-    fun multiplication_isCorrect() {
-        assertEquals(4, 2 * 2)
-    }
-
-    @Test
-    fun increment_isCorrect() {
-        var a = 3
-        a++
-        assertEquals(4, a)
-    }
-
-    @Test
-    fun decrement_isCorrect() {
-        var a = 2
-        a--
-        assertEquals(1, a)
-    }
 }
