@@ -19,4 +19,11 @@ class ExampleUnitTest {
     fun multiplication_isCorrect() {
         assertEquals(4, 2 * 2)
     }
+
+    @Test
+    fun increment_isCorrect() {
+        var a = 1
+        a++
+        assertEquals(2, a)
+    }
 }
