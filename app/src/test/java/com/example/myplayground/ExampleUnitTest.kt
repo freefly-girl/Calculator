@@ -8,12 +8,13 @@ import org.junit.Test
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
+
 class ExampleUnitTest {
+
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
-
 
     @Test
     fun multiplication_isCorrect() {
@@ -21,16 +22,16 @@ class ExampleUnitTest {
     }
 
     @Test
+    fun increment_isCorrect() {
+        var a = 3
+        a++
+        assertEquals(4, a)
+    }
+
+    @Test
     fun decrement_isCorrect() {
         var a = 2
         a--
         assertEquals(1, a)
-
-        @Test
-        fun feature2_isCorrect() {
-            var a = 1
-            a++
-            println("Feature 2")
-            assertEquals(2, a)
-        }
     }
+}
