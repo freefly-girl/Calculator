@@ -22,4 +22,11 @@ class ExampleUnitTest {
         a++
         assertEquals(6, a)
     }
+
+    @Test
+    fun decrement_isCorrect() {
+        var b = 8
+        b--
+        assertEquals(7, b)
+    }
 }
