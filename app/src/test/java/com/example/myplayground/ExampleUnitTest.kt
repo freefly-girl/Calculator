@@ -20,10 +20,5 @@ class ExampleUnitTest {
         assertEquals(4, 2 * 2)
     }
 
-    @Test
-    fun decrement_isCorrect() {
-        var a = 2
-        a--
-        assertEquals(1, a)
-    }
+
 }
