@@ -18,7 +18,7 @@ class ExampleUnitTest {
 
     @Test
     fun increment_isCorrect() {
-        val a = 5
+        var a = 5
         a++
         assertEquals(6, a)
     }
