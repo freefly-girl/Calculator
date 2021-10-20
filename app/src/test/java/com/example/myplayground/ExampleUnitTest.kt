@@ -15,4 +15,11 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+    @Test
+    fun decrement_isCorrect() {
+        var b = 8
+        b--
+        assertEquals(7, b)
+    }
 }
