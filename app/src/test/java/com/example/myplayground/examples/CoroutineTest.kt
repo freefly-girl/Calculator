@@ -4,57 +4,57 @@ import kotlinx.coroutines.*
 import kotlin.system.measureTimeMillis
 
 fun main() {
-    val time = measureTimeMillis {
-        runBlocking {
-            launch {
-                timer(20_000)
-            }
-        }
+  val time = measureTimeMillis {
+    runBlocking {
+      launch {
+        timer(20_000)
+      }
     }
-    println("Time $time")
+  }
+  println("Time $time")
 }
 
 private suspend fun makeComputaion(): Int = coroutineScope {
-    val result1: Deferred<Int> = async { computation1() }
-    val result2: Deferred<Int> = async { computation2() }
-    result1.await() + result2.await()
+  val result1: Deferred<Int> = async { computation1() }
+  val result2: Deferred<Int> = async { computation2() }
+  result1.await() + result2.await()
 }
 
 suspend fun computation1(): Int {
-    delay(2000L)
-    return 2
+  delay(2000L)
+  return 2
 }
 
 suspend fun computation2(): Int {
-    delay(3000L)
-    return 3
+  delay(3000L)
+  return 3
 }
 
 
 private suspend fun doThread() = coroutineScope {
-    repeat(100_000) {
-        launch {
-            delay(2000)
-            println(";")
-        }
+  repeat(100_000) {
+    launch {
+      delay(2000)
+      println(";")
     }
+  }
 }
 
 private suspend fun doWorld() {
-    coroutineScope {
-        val job: Job = launch {
-            delay(2000)
-            println("World 1 !")
-        }
-//        job.cancel()
-        job.join()
-        println(job.isCompleted)
-        launch {
-            delay(4000)
-            println("World 2 !")
-        }
-        println("Hello")
+  coroutineScope {
+    val job: Job = launch {
+      delay(2000)
+      println("World 1 !")
     }
+//        job.cancel()
+    job.join()
+    println(job.isCompleted)
+    launch {
+      delay(4000)
+      println("World 2 !")
+    }
+    println("Hello")
+  }
 }
 
 
@@ -81,15 +81,15 @@ private suspend fun doWorld() {
  */
 
 private suspend fun timer(time: Long) {
-    var delayedTime = 0
-    while (delayedTime < time) {
-        val deltaDelay = when {
-            delayedTime < 2_000 -> 100
-            delayedTime < 10_000 -> 1000
-            else -> 2000
-        }
-        delay(deltaDelay.toLong())
-        delayedTime += deltaDelay
-        println(delayedTime)
+  var delayedTime = 0
+  while (delayedTime < time) {
+    val deltaDelay = when {
+      delayedTime < 2_000 -> 100
+      delayedTime < 10_000 -> 1000
+      else -> 2000
     }
+    delay(deltaDelay.toLong())
+    delayedTime += deltaDelay
+    println(delayedTime)
+  }
 }
