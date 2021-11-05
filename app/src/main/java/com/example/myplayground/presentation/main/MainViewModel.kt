@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myplayground.data.calculateExpression
 import com.example.myplayground.domain.SettingsDao
+import com.example.myplayground.domain.entity.FormatResultTypeEnum
 import com.example.myplayground.domain.entity.HistoryItem
 import com.example.myplayground.domain.entity.HistoryRepository
 import com.example.myplayground.domain.entity.ResultPanelType
@@ -28,6 +29,9 @@ class MainViewModel(
   private val _resultPanelState = MutableLiveData<ResultPanelType>()
   val resultPanelState: LiveData<ResultPanelType> = _resultPanelState
 
+  private val _formatResultState = MutableLiveData(FormatResultTypeEnum.MANY)
+  val formatResultState: LiveData<FormatResultTypeEnum> = _formatResultState
+
   init {
     viewModelScope.launch {
       _resultPanelState.value = settingsDao.getResultPanelType()
@@ -35,11 +39,11 @@ class MainViewModel(
   }
 
   fun onEqualsClicked() {
-    val result = calculateExpression(expression)
+    val result = calculateExpression(expression, _formatResultState.value)
+    _resultState.value = result
     viewModelScope.launch {
       historyRepository.add(HistoryItem(expression, result))
     }
-    _resultState.value = result
     _expressionState.value = ExpressionState(result, result.length)
     expression = result
   }
@@ -47,14 +51,14 @@ class MainViewModel(
   fun onNumberClick(number: Int, selection: Int) {
     expression = putInSelection(number.toString(), selection)
     _expressionState.value = ExpressionState(expression, selection + 1)
-    _resultState.value = calculateExpression(expression)
+    _resultState.value = calculateExpression(expression, _formatResultState.value)
   }
 
   fun onBackSpaceClicked(selection: Int) {
     if (expression.isNotBlank() && (expression.last().isDigit() || expression.endsWith("."))) {
       expression = expression.removeRange(selection - 1, selection)
       _expressionState.value = ExpressionState(expression, (selection - 1).coerceAtLeast(0))
-      _resultState.value = calculateExpression(expression)
+      _resultState.value = calculateExpression(expression, _formatResultState.value)
     }
   }
 
@@ -62,7 +66,7 @@ class MainViewModel(
     if (expression.isNotBlank() && (expression.last().isDigit() || expression.endsWith("."))) {
       expression = putInSelection(".", selection)
       _expressionState.value = ExpressionState(expression, selection + 1)
-      _resultState.value = calculateExpression(expression)
+      _resultState.value = calculateExpression(expression, _formatResultState.value)
     }
   }
 
@@ -70,7 +74,7 @@ class MainViewModel(
     if (expression.isNotBlank() && (expression.last().isDigit() || expression.endsWith("."))) {
       expression = putInSelection(operator.symbol, selection)
       _expressionState.value = ExpressionState(expression, selection + 1)
-      _resultState.value = calculateExpression(expression)
+      _resultState.value = calculateExpression(expression, _formatResultState.value)
     }
   }
 
@@ -95,9 +99,16 @@ class MainViewModel(
     Log.d("MainViewModel", "onCleared")
   }
 
+  private fun resultUpdate() {
+    val result = calculateExpression(expression, _formatResultState.value)
+    _resultState.value = result
+  }
+
   fun onStart() {
     viewModelScope.launch {
       _resultPanelState.value = settingsDao.getResultPanelType()
+      _formatResultState.value = settingsDao.getFormatResultType()
+      resultUpdate()
     }
   }
 

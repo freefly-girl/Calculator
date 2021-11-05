@@ -39,6 +39,8 @@ class MainActivity : BaseActivity() {
     }
   }
 
+//  private val viewBinding by viewBinding(MainActivityBinding::bind)
+
   private val resultLauncher = registerForActivityResult(HistoryResult()) { item ->
     viewModel.onHistoryResult(item)
   }
@@ -47,17 +49,11 @@ class MainActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.main_activity)
 
-    viewBinding.mainInput.apply {
-      showSoftInputOnFocus = false
-    }
+    viewBinding.mainInput.apply { showSoftInputOnFocus = false }
 
-    viewBinding.mainActivitySettings.setOnClickListener {
-      openSettings()
-    }
+    viewBinding.mainActivitySettings.setOnClickListener { openSettings() }
 
-    viewBinding.mainHistory?.setOnClickListener {
-      openHistory()
-    }
+    viewBinding.mainHistory?.setOnClickListener { openHistory() }
 
     viewModel.expressionState.observe(this) {
       viewBinding.mainInput.setText(it.expression)
@@ -92,6 +88,7 @@ class MainActivity : BaseActivity() {
       viewBinding.mainNine
     ).forEachIndexed { index, textView ->
       textView.setOnClickListener {
+
         viewModel.onNumberClick(index, viewBinding.mainInput.selectionStart)
       }
     }
@@ -124,9 +121,7 @@ class MainActivity : BaseActivity() {
       viewModel.onOperatorClicker(MULTIPLE, viewBinding.mainInput.selectionStart)
     }
 
-    viewBinding.mainEquals.setOnClickListener {
-      viewModel.onEqualsClicked()
-    }
+    viewBinding.mainEquals.setOnClickListener { viewModel.onEqualsClicked() }
   }
 
   override fun onStart() {

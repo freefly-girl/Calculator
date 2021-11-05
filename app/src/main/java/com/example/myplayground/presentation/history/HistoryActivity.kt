@@ -28,6 +28,7 @@ class HistoryActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.history_activity)
+    viewBinding.historyBack.setOnClickListener { finish() }
 
     val historyAdapter = HistoryAdapter(viewModel::onItemClicked)
 

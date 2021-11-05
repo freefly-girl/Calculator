@@ -9,7 +9,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="Настройки"
+        android:text="@string/settings_result_panel_title"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:gravity="center"
@@ -42,12 +42,42 @@
             android:id="@+id/result_panel_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings_result_panel_title"
+            android:text="@string/resultPanelSettingsText"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/result_panel_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            tools:text="Скрыта" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/format_result_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="24sp"
+        android:padding="16dp"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_panel_container">
+
+        <TextView
+            android:id="@+id/formatResultViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/formatResultViewName"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/formatResultViewDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

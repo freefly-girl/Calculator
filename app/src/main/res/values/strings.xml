@@ -1,11 +1,32 @@
 <resources>
     <string name="app_name">Calculator</string>
-    <string name="settings_result_panel_title">Панель результата</string>
+    <string name="settings_result_panel_title">Панель настроек</string>
+
+    <string name="resultPanelSettingsText">Расположение панели результата</string>
+    <!--    <string name="resultPanelSettingsEnum">Справа</string>-->
+    <string name="formatResultViewName">Количество знаков после запятой</string>
+    <!--    <string name="formatResultViewDescription">Один знак</string>-->
+    <!--    <string name="vibrationForceViewName">Сила вибрации</string>-->
+    <!--    <string name="vibrationForceViewDescription">Слабая</string>-->
+    <string name="ok_positive_button">ОК</string>
+    <string name="no_negative_button">НЕТ</string>
+
+    <!--    <string name="settings_menu_name">Настройки</string>-->
+    <!--    <string name="history_menu_name">История</string>-->
+
     <string name="history_title">История</string>
 
     <string-array name="result_panel_types">
-        <item>Есть. Отображается слева</item>
-        <item>Есть. Отображается справа</item>
-        <item>Скрыта.</item>
+        <item>Слева</item>
+        <item>Справа</item>
+        <item>Скрыта</item>
     </string-array>
+
+    <string-array name="format_result_types">
+        <item>Один знак</item>
+        <item>Два знака</item>
+        <item>Три знака</item>
+        <item>Без ограничений</item>
+    </string-array>
+
 </resources>

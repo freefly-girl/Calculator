@@ -1,5 +1,6 @@
 package com.example.myplayground.data
 
+import com.example.myplayground.domain.entity.FormatResultTypeEnum
 import com.fathzer.soft.javaluator.DoubleEvaluator
 import kotlin.math.floor
 
@@ -7,7 +8,7 @@ import kotlin.math.floor
  * Рассчитывает значение выражения [expression]
  */
 
-fun calculateExpression(expression: String): String {
+fun calculateExpression(expression: String, formatResultType: FormatResultTypeEnum?): String {
 
   if (expression.isBlank()) return ""
 
@@ -21,7 +22,16 @@ fun calculateExpression(expression: String): String {
 //    formattedExpression = formattedExpression
 //  }
 
-  val result = DoubleEvaluator().evaluate(formattedExpression)
+  val solution = DoubleEvaluator().evaluate(formattedExpression)
+
+  // TODO: 05.11.2021 DigitsAfterPoint 
+  val result = when (formatResultType) {
+    FormatResultTypeEnum.ONE -> String.format("%.1f", solution).toDouble()
+    FormatResultTypeEnum.TWO -> String.format("%.2f", solution).toDouble()
+    FormatResultTypeEnum.TREE -> String.format("%.3f", solution).toDouble()
+    FormatResultTypeEnum.MANY -> solution
+    null -> solution
+  }
 
   return if (floor(result) == result) {
     result.toInt().toString()

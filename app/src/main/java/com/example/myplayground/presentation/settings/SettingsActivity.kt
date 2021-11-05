@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.myplayground.R
 import com.example.myplayground.databinding.SettingsActivityBinding
 import com.example.myplayground.di.SettingsDaoProvider
+import com.example.myplayground.domain.entity.FormatResultTypeEnum
 import com.example.myplayground.domain.entity.ResultPanelType
 import com.example.myplayground.presentation.common.BaseActivity
 
@@ -28,9 +29,7 @@ class SettingsActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.settings_activity)
-    viewBinding.settingsBack.setOnClickListener {
-      finish()
-    }
+    viewBinding.settingsBack.setOnClickListener { finish() }
 
     viewBinding.resultPanelContainer.setOnClickListener {
       viewModel.onResultPanelTypeClicked()
@@ -44,21 +43,47 @@ class SettingsActivity : BaseActivity() {
     viewModel.openResultPanelAction.observe(this) { type ->
       showDialog(type)
     }
+
+    // TODO: 05.11.2021 Format
+    viewBinding.formatResultContainer.setOnClickListener {
+      viewModel.onFormatResultPanelTypeClicked()
+    }
+
+    viewModel.openFormatResultAction.observe(this) { type ->
+      showDialogFormatResultPanel(type)
+    }
+
+    viewModel.formatResultState.observe(this) { state ->
+      viewBinding.formatResultViewDescription.text =
+        resources.getStringArray(R.array.format_result_types)[state.ordinal]
+    }
+
   }
 
   private fun showDialog(type: ResultPanelType) {
     var result: Int? = null
     AlertDialog.Builder(this)
-      .setTitle("Title")
-      .setPositiveButton("Ok") { dialog, id ->
+      .setTitle(getString(R.string.settings_result_panel_title))
+      .setPositiveButton(getString(R.string.ok_positive_button)) { dialog, id ->
         result?.let { viewModel.onResultPanelTypeChanged(ResultPanelType.values()[it]) }
       }
-      .setNegativeButton("Отмена") { dialog, id ->
-
-      }
+      .setNegativeButton(getString(R.string.no_negative_button)) { dialog, id -> }
       .setSingleChoiceItems(R.array.result_panel_types, type.ordinal) { dialog, id ->
-        viewModel.onResultPanelTypeChanged(ResultPanelType.values()[id])
+        result = id
+      }
+      .show()
+  }
 
+  private fun showDialogFormatResultPanel(type: FormatResultTypeEnum) {
+    var result: Int? = null
+    AlertDialog.Builder(this)
+      .setTitle(getString(R.string.settings_result_panel_title))
+      .setPositiveButton(getString(R.string.ok_positive_button)) { dialog, id ->
+        result?.let { viewModel.onFormatResultChanged(FormatResultTypeEnum.values()[it]) }
+      }
+      .setNegativeButton(getString(R.string.no_negative_button)) { dialog, id -> }
+      .setSingleChoiceItems(R.array.format_result_types, type.ordinal) { dialog, id ->
+        result = id
       }
       .show()
   }
