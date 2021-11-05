@@ -4,5 +4,7 @@ enum class Operator(val symbol: String) {
   MINUS("-"),
   PLUS("+"),
   MULTIPLE("*"),
-  DIVIDE("/")
+  DIVIDE("/"),
+  SQRT("√"),
+  DEGREE("^")
 }

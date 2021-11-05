@@ -24,7 +24,7 @@ class MainViewModelTest {
     viewModel.onNumberClick(2, 2)
 
     Assert.assertEquals("2+2", viewModel.expressionState.value?.expression)
-    Assert.assertEquals("4", viewModel.resultState.value)
+      Assert.assertEquals("4", viewModel.formatResultState.value)
   }
 
   @Test

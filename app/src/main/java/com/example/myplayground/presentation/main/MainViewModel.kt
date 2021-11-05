@@ -78,6 +78,22 @@ class MainViewModel(
     }
   }
 
+  fun onSqrtButtonClick() {
+
+    if (expression.isNotBlank()) {
+
+      var formattedExpression = expression
+      while (!formattedExpression.last().isDigit()) {
+        formattedExpression = formattedExpression.dropLast(1)
+      }
+
+      expression = "$formattedExpression^0.5"
+      val result = calculateExpression(expression, _formatResultState.value)
+      _expressionState.value = ExpressionState(expression, expression.length)
+      _resultState.value = result
+    }
+  }
+
   fun onClearClicked(selectionStart: Int) {
     expression = ""
     _expressionState.value = ExpressionState("", 0)

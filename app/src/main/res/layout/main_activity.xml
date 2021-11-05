@@ -32,10 +32,10 @@
                 android:scaleType="center" />
 
             <TextView
-                android:id="@+id/main_memory"
+                android:id="@+id/main_dergee"
                 style="@style/MainButton"
                 android:layout_weight="1"
-                android:text="M" />
+                android:text="^" />
 
             <TextView
                 android:id="@+id/main_divider"
@@ -156,9 +156,15 @@
                 android:text="0" />
 
             <TextView
+                android:id="@+id/main_sqrt"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="√" />
+
+            <TextView
                 android:id="@+id/main_equals"
                 style="@style/MainButton"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:text="=" />
         </LinearLayout>
     </LinearLayout>

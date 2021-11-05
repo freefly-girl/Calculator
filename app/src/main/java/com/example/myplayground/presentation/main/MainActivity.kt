@@ -121,6 +121,14 @@ class MainActivity : BaseActivity() {
       viewModel.onOperatorClicker(MULTIPLE, viewBinding.mainInput.selectionStart)
     }
 
+    viewBinding.mainDergee?.setOnClickListener {
+      viewModel.onOperatorClicker(DEGREE, viewBinding.mainInput.selectionStart)
+    }
+
+    viewBinding.mainSqrt?.setOnClickListener {
+      viewModel.onSqrtButtonClick()
+    }
+
     viewBinding.mainEquals.setOnClickListener { viewModel.onEqualsClicked() }
   }
 
