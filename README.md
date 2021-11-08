@@ -41,7 +41,9 @@
 │       │   │               │   ├── CalculateExpression.kt
 │       │   │               │   ├── SettingsDao.kt
 │       │   │               │   └── entity
-│       │   │               │       ├── HistoryItem.kt
+│       │   │               │       ├── ForceVibrationTypeEnum
+│       │   │               │       ├── FormatResultTypeEnum
+│       │   │               │       ├── HistoryItem.kt
 │       │   │               │       ├── HistoryRepository.kt
 │       │   │               │       └── ResultPanelType.kt
 │       │   │               └── presentation
@@ -57,8 +59,9 @@
 │       │   │                   │   ├── ExpressionState.kt
 │       │   │                   │   ├── MainActivity.kt
 │       │   │                   │   ├── MainViewModel.kt
-│       │   │                   │   └── Operator.kt
-│       │   │                   └── settings
+│       │   │                   │   ├── Operator.kt
+│       │   │                   │   └── VibrationMSTypes
+│       │   │                   └── settings
 │       │   │                       ├── SettingsActivity.kt
 │       │   │                       └── SettingsViewModel.kt
 │       │   └── res
