@@ -47,7 +47,6 @@ class SettingsViewModel(
     }
   }
 
-
   fun onFormatResultChanged(formatResultType: FormatResultTypeEnum) {
     _formatResultState.value = formatResultType
     viewModelScope.launch {
@@ -58,7 +57,6 @@ class SettingsViewModel(
   fun onFormatResultPanelTypeClicked() {
     _openFormatResultAction.value = _formatResultState.value
   }
-
 
   fun onResultPanelTypeChanged(resultPanelType: ResultPanelType) {
     _resultPanelState.value = resultPanelType
@@ -71,7 +69,6 @@ class SettingsViewModel(
     _openResultPanelAction.value = _resultPanelState.value
   }
 
-
   fun onForceVibrationChanged(forceVibrationType: ForceVibrationTypeEnum) {
     _forceVibrationState.value = forceVibrationType
     viewModelScope.launch {
@@ -83,4 +80,3 @@ class SettingsViewModel(
     _openForceVibrationAction.value = _forceVibrationState.value
   }
 }
-

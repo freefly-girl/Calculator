@@ -81,15 +81,12 @@ class MainActivity : BaseActivity() {
     ).forEachIndexed { index, textView ->
       textView.setOnClickListener {
 
-        // TODO: 07.11.2021 Vibration
-
         val vibratorService = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibratorService.vibrate(forceVibrationValue)
 
         viewModel.onNumberClick(index, viewBinding.mainInput.selectionStart)
       }
     }
-
 
     viewBinding.mainBack.setOnClickListener {
       viewModel.onBackSpaceClicked(viewBinding.mainInput.selectionStart)
@@ -128,7 +125,6 @@ class MainActivity : BaseActivity() {
     }
 
     viewBinding.mainEquals.setOnClickListener { viewModel.onEqualsClicked() }
-
 
     viewModel.resultPanelState.observe(this) {
       with(viewBinding.mainResult) {

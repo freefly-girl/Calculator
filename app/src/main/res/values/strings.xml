@@ -3,6 +3,7 @@
     <string name="settings_menu_name">Настройки</string>
 
     <string name="settings_result_panel_title">Панель настроек</string>
+    <string name="history_title">История</string>
 
     <string name="resultPanelSettingsText">Расположение панели результата</string>
     <string name="formatResultViewName">Количество знаков после запятой</string>
@@ -10,9 +11,6 @@
     <string name="ok_positive_button">ОК</string>
     <string name="no_negative_button">НЕТ</string>
 
-    <!--    <string name="history_menu_name">История</string>-->
-
-    <string name="history_title">История</string>
 
     <string-array name="result_panel_types">
         <item>Слева</item>

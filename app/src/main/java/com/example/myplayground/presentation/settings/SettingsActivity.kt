@@ -73,7 +73,6 @@ class SettingsActivity : BaseActivity() {
       viewBinding.vibrationForceViewDescription.text =
         resources.getStringArray(R.array.vibration_force_types)[state.ordinal]
     }
-
   }
 
   private fun showDialog(type: ResultPanelType) {
@@ -128,7 +127,5 @@ class SettingsActivity : BaseActivity() {
     AlertDialog.Builder(this)
       .setView(view)
       .show()
-
   }
-
 }

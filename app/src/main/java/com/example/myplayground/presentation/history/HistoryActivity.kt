@@ -48,7 +48,6 @@ class HistoryActivity : BaseActivity() {
   }
 
   companion object {
-
     const val HISTORY_ACTIVITY_KEY = "HISTORY_ACTIVITY_KEY"
   }
 }

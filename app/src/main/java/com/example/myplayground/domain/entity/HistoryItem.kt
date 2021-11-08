@@ -12,4 +12,3 @@ data class HistoryItem(
 ) : Parcelable {
 
 }
-

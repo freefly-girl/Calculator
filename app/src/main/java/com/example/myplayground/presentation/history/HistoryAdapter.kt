@@ -54,5 +54,3 @@ class HistoryAdapter(
 fun LocalDateTime.formatForHistory(): String {
   return format(DateTimeFormatter.ofPattern("HH:mm dd MMM yyyy"))
 }
-
-

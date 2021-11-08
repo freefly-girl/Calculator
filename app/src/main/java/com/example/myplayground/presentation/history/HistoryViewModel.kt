@@ -29,4 +29,3 @@ class HistoryViewModel(
     _closeWithResult.value = historyItem
   }
 }
-
