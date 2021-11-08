@@ -1,6 +1,5 @@
 package com.example.myplayground.domain
 
-import com.example.myplayground.data.calculateExpression
 import org.junit.Assert
 import org.junit.Test
 
@@ -10,21 +9,21 @@ class CalculateExpressionKtTest {
   fun testPlus() {
     val expression = "2+2"
     val result = "4"
-    Assert.assertEquals(result, calculateExpression(expression))
+    Assert.assertEquals(result, calculateExpression(expression, null))
   }
 
   @Test
   fun testSubtraction() {
     val expression = "5-3"
     val result = "2"
-    Assert.assertEquals(result, calculateExpression(expression))
+    Assert.assertEquals(result, calculateExpression(expression, null))
   }
 
   @Test
   fun test() {
     val expression = "999999990/10"
     val result = "99999999"
-    Assert.assertEquals(result, calculateExpression(expression))
+    Assert.assertEquals(result, calculateExpression(expression, null))
   }
 
   @Test
@@ -39,6 +38,6 @@ class CalculateExpressionKtTest {
     expression: String,
     result: String
   ) {
-    Assert.assertEquals(result, calculateExpression(expression))
+    Assert.assertEquals(result, calculateExpression(expression, null))
   }
 }

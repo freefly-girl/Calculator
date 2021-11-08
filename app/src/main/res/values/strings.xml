@@ -1,17 +1,15 @@
 <resources>
     <string name="app_name">Calculator</string>
+    <string name="settings_menu_name">Настройки</string>
+
     <string name="settings_result_panel_title">Панель настроек</string>
 
     <string name="resultPanelSettingsText">Расположение панели результата</string>
-    <!--    <string name="resultPanelSettingsEnum">Справа</string>-->
     <string name="formatResultViewName">Количество знаков после запятой</string>
-    <!--    <string name="formatResultViewDescription">Один знак</string>-->
-    <!--    <string name="vibrationForceViewName">Сила вибрации</string>-->
-    <!--    <string name="vibrationForceViewDescription">Слабая</string>-->
+    <string name="vibrationForceViewName">Сила вибрации при нажатии</string>
     <string name="ok_positive_button">ОК</string>
     <string name="no_negative_button">НЕТ</string>
 
-    <!--    <string name="settings_menu_name">Настройки</string>-->
     <!--    <string name="history_menu_name">История</string>-->
 
     <string name="history_title">История</string>
@@ -27,6 +25,13 @@
         <item>Два знака</item>
         <item>Три знака</item>
         <item>Без ограничений</item>
+    </string-array>
+
+    <string-array name="vibration_force_types">
+        <item>Нет</item>
+        <item>Слабая</item>
+        <item>Средняя</item>
+        <item>Сильная</item>
     </string-array>
 
 </resources>

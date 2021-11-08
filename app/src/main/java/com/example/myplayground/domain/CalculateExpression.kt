@@ -1,8 +1,13 @@
-package com.example.myplayground.data
+package com.example.myplayground.domain
 
 import com.example.myplayground.domain.entity.FormatResultTypeEnum
 import com.fathzer.soft.javaluator.DoubleEvaluator
+import java.math.BigDecimal
+import java.math.MathContext
 import kotlin.math.floor
+
+val mc = MathContext(5)
+val evaluator = DoubleEvaluator(DoubleEvaluator.getDefaultParameters(), true)
 
 /**
  * Рассчитывает значение выражения [expression]
@@ -19,9 +24,10 @@ fun calculateExpression(expression: String, formatResultType: FormatResultTypeEn
       formattedExpression = formattedExpression.dropLast(1)
     }
 
-    val solution = DoubleEvaluator().evaluate(formattedExpression)
+//    val solution = DoubleEvaluator().evaluate(formattedExpression)
 
-    // TODO: 05.11.2021 DigitsAfterPoint
+    val solution = BigDecimal(evaluator.evaluate(formattedExpression), mc).toDouble()
+
     val result = when (formatResultType) {
       FormatResultTypeEnum.ONE -> String.format("%.1f", solution).toDouble()
       FormatResultTypeEnum.TWO -> String.format("%.2f", solution).toDouble()

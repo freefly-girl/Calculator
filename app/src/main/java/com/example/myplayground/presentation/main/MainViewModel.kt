@@ -5,12 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myplayground.data.calculateExpression
 import com.example.myplayground.domain.SettingsDao
-import com.example.myplayground.domain.entity.FormatResultTypeEnum
-import com.example.myplayground.domain.entity.HistoryItem
-import com.example.myplayground.domain.entity.HistoryRepository
-import com.example.myplayground.domain.entity.ResultPanelType
+import com.example.myplayground.domain.calculateExpression
+import com.example.myplayground.domain.entity.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -31,6 +28,10 @@ class MainViewModel(
 
   private val _formatResultState = MutableLiveData(FormatResultTypeEnum.MANY)
   val formatResultState: LiveData<FormatResultTypeEnum> = _formatResultState
+
+  private val _forceVibrationState =
+    MutableLiveData<ForceVibrationTypeEnum>(ForceVibrationTypeEnum.SMALL)
+  val forceVibrationState: LiveData<ForceVibrationTypeEnum> = _forceVibrationState
 
   init {
     viewModelScope.launch {

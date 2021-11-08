@@ -1,7 +1,8 @@
 package com.example.myplayground.presentation.main
 
+import android.content.Context
 import android.content.Intent
-import android.os.Bundle
+import android.os.*
 import android.view.Gravity
 import androidx.activity.result.launch
 import androidx.activity.viewModels
@@ -13,6 +14,7 @@ import com.example.myplayground.R
 import com.example.myplayground.databinding.MainActivityBinding
 import com.example.myplayground.di.HistoryRepositoryProvider
 import com.example.myplayground.di.SettingsDaoProvider
+import com.example.myplayground.domain.entity.ForceVibrationTypeEnum.*
 import com.example.myplayground.domain.entity.ResultPanelType.*
 import com.example.myplayground.presentation.common.BaseActivity
 import com.example.myplayground.presentation.history.HistoryResult
@@ -39,15 +41,19 @@ class MainActivity : BaseActivity() {
     }
   }
 
-//  private val viewBinding by viewBinding(MainActivityBinding::bind)
-
   private val resultLauncher = registerForActivityResult(HistoryResult()) { item ->
     viewModel.onHistoryResult(item)
   }
 
+  private var vibrationEffect: VibrationEffect? = null
+
+  //  @RequiresApi(31)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.main_activity)
+
+    val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+//    val vibrator = vibratorManager.defaultVibrator
 
     viewBinding.mainInput.apply { showSoftInputOnFocus = false }
 
@@ -64,16 +70,6 @@ class MainActivity : BaseActivity() {
       viewBinding.mainResult.text = it
     }
 
-    viewModel.resultPanelState.observe(this) {
-      with(viewBinding.mainResult) {
-        gravity = when (it) {
-          LEFT -> Gravity.START.or(Gravity.CENTER_VERTICAL)
-          RIGHT -> Gravity.END.or(Gravity.CENTER_VERTICAL)
-          HIDE -> viewBinding.mainResult.gravity
-        }
-        isVisible = it != HIDE
-      }
-    }
 
     listOf(
       viewBinding.mainZero,
@@ -89,9 +85,13 @@ class MainActivity : BaseActivity() {
     ).forEachIndexed { index, textView ->
       textView.setOnClickListener {
 
+        // TODO: 07.11.2021 Vibration
+        vibrator.cancel()
+        vibrator.vibrate(vibrationEffect)
         viewModel.onNumberClick(index, viewBinding.mainInput.selectionStart)
       }
     }
+
 
     viewBinding.mainBack.setOnClickListener {
       viewModel.onBackSpaceClicked(viewBinding.mainInput.selectionStart)
@@ -130,6 +130,27 @@ class MainActivity : BaseActivity() {
     }
 
     viewBinding.mainEquals.setOnClickListener { viewModel.onEqualsClicked() }
+
+
+    viewModel.resultPanelState.observe(this) {
+      with(viewBinding.mainResult) {
+        gravity = when (it) {
+          LEFT -> Gravity.START.or(Gravity.CENTER_VERTICAL)
+          RIGHT -> Gravity.END.or(Gravity.CENTER_VERTICAL)
+          HIDE -> viewBinding.mainResult.gravity
+        }
+        isVisible = it != HIDE
+      }
+    }
+
+    viewModel.forceVibrationState.observe(this) {
+      vibrationEffect = when (it) {
+        NO -> VibrationEffect.createOneShot(0, VibrationEffect.DEFAULT_AMPLITUDE)
+        SMALL -> VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
+        MEDIUM -> VibrationEffect.createPredefined(VibrationEffect.EFFECT_DOUBLE_CLICK)
+        STRONG -> VibrationEffect.createPredefined(VibrationEffect.EFFECT_HEAVY_CLICK)
+      }
+    }
   }
 
   override fun onStart() {

@@ -9,7 +9,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="@string/settings_result_panel_title"
+        android:text="@string/settings_menu_name"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:gravity="center"
@@ -78,6 +78,36 @@
 
         <TextView
             android:id="@+id/formatResultViewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            tools:text="Скрыта" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/vibration_force_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="24sp"
+        android:padding="16dp"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/format_result_container">
+
+        <TextView
+            android:id="@+id/vibrationForceViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vibrationForceViewName"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/vibrationForceViewDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
