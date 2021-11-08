@@ -36,6 +36,8 @@ class MainViewModel(
   init {
     viewModelScope.launch {
       _resultPanelState.value = settingsDao.getResultPanelType()
+      _formatResultState.value = settingsDao.getFormatResultType()
+      _forceVibrationState.value = settingsDao.getForceVibrationType()
     }
   }
 
@@ -125,6 +127,7 @@ class MainViewModel(
     viewModelScope.launch {
       _resultPanelState.value = settingsDao.getResultPanelType()
       _formatResultState.value = settingsDao.getFormatResultType()
+      _forceVibrationState.value = settingsDao.getForceVibrationType()
       resultUpdate()
     }
   }

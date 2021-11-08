@@ -45,15 +45,11 @@ class MainActivity : BaseActivity() {
     viewModel.onHistoryResult(item)
   }
 
-  private var vibrationEffect: VibrationEffect? = null
+  private var forceVibrationValue: Long = VibrationMSTypes.SMALL.force
 
-  //  @RequiresApi(31)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.main_activity)
-
-    val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-//    val vibrator = vibratorManager.defaultVibrator
 
     viewBinding.mainInput.apply { showSoftInputOnFocus = false }
 
@@ -86,8 +82,10 @@ class MainActivity : BaseActivity() {
       textView.setOnClickListener {
 
         // TODO: 07.11.2021 Vibration
-        vibrator.cancel()
-        vibrator.vibrate(vibrationEffect)
+
+        val vibratorService = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        vibratorService.vibrate(forceVibrationValue)
+
         viewModel.onNumberClick(index, viewBinding.mainInput.selectionStart)
       }
     }
@@ -143,12 +141,12 @@ class MainActivity : BaseActivity() {
       }
     }
 
-    viewModel.forceVibrationState.observe(this) {
-      vibrationEffect = when (it) {
-        NO -> VibrationEffect.createOneShot(0, VibrationEffect.DEFAULT_AMPLITUDE)
-        SMALL -> VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
-        MEDIUM -> VibrationEffect.createPredefined(VibrationEffect.EFFECT_DOUBLE_CLICK)
-        STRONG -> VibrationEffect.createPredefined(VibrationEffect.EFFECT_HEAVY_CLICK)
+    viewModel.forceVibrationState.observe(this) { state ->
+      forceVibrationValue = when (state) {
+        NO -> VibrationMSTypes.NO.force
+        SMALL -> VibrationMSTypes.SMALL.force
+        MEDIUM -> VibrationMSTypes.MEDIUM.force
+        STRONG -> VibrationMSTypes.STRONG.force
       }
     }
   }
